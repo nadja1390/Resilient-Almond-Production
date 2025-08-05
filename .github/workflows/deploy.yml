@@ -1,0 +1,32 @@
+name: Deploy Jupyter Book
+
+on:
+  push:
+    branches:
+      - main  # or 'master' if that’s your default branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      - name: Install dependencies
+        run: |
+          pip install -U jupyter-book ghp-import
+
+      - name: Pin snowballstemmer to 2.2.0 (needed for 'porter')
+        run: pip install snowballstemmer==2.2.0
+
+      - name: Build the book
+        run: jupyter-book build .
+
+      - name: Deploy to GitHub Pages
+        run: ghp-import -n -p -f _build/html

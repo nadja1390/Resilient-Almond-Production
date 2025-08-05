@@ -1,0 +1,11 @@
+# Table of contents
+# Learn more at https://jupyterbook.org/customize/toc.html
+
+format: jb-book
+root: intro
+chapters:
+- file: Regenerative_Ag_Man
+- file: Climate_resilience
+- file: Orchard_Water_Use
+- file: growth_variablity
+- file: Datasets
